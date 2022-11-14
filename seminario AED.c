@@ -1,35 +1,36 @@
 /******************************************************************************
 
-Elabore um programa que, considerando um vetor de 10 posições de
-inteiros, apresente as seguintes opções de operações para o usuárioi:
+Elabore um programa que, considerando um vetor de 10 posiï¿½ï¿½es de
+inteiros, apresente as seguintes opï¿½ï¿½es de operaï¿½ï¿½es para o usuï¿½rioi:
 1- Preencher o vetor
 2- Buscar por um valor:
 a) tipo de busca 1 (a definir)
 b) tipo de busca 2 (a definir)
 3- Ordenar o vetor:
-a) tipo de ordenação 1 (a definir)
-b) tipo de ordenação 2 (a definir)
+a) tipo de ordenaï¿½ï¿½o 1 (a definir)
+b) tipo de ordenaï¿½ï¿½o 2 (a definir)
 4- Sair
 
 *******************************************************************************/
 #include <stdio.h>
-#include <conio.h>
+#include <stdlib.h>
 #define N 3
 
-//função para cadastrar os numeros do vetor
-void cadastra_vet (int *vet)
+//funï¿½ï¿½o para cadastrar os numeros do vetor
+void cadastra_vet (int * vet)
 {
   int i;
   for (i = 0; i < N; i++)
     {
-      printf ("entre com o numero do vetor;");
+      printf ("Entre com o numero do vetor: ");
       scanf ("%d", &vet[i]);
+      fflush(stdin);
     }
 }
 
 
 
-//função para imprimir o vetor
+//funï¿½ï¿½o para imprimir o vetor
 void imprime_vet (int *vet)
 {
   int i;
@@ -37,30 +38,38 @@ void imprime_vet (int *vet)
     printf ("%d ", vet[i]);
 }
 
-//função para buscar um elemento na lista
-void busca (int*vet, int x){
-    printf ("entre com o numero");
-    scanf ("%d", &x);
+//funï¿½ï¿½o para buscar um elemento na lista
+void busca (int * vet){
     int i;
+    int x;
+
+    printf ("Entre com o numero: ");
+    scanf ("%d", &x);
+
     for (i = 0; i < N; i++)
     {
-	if (vet[i]==x)
-    	{printf("\n elemento na posicao %d",i);
-    	break;}
-    else if (i==(N-1))
-    	printf("\n elemento nao encontrado");
+        if (vet[i] == x)
+        {
+            printf("Elemento na posicao %d", i);
+            break;
+        }            
 	}
+
+    if(i == N)
+    {
+        printf("\nElemento nao encontrado");
+    }
 }
 
-//função para busca binaria
+//funï¿½ï¿½o para busca binaria
 
-int busca_binaria (int*vet, int x){
+int busca_binaria (int * vet, int x){
     return 0;
 }
 
 
 
-// função para ordenar um vetor
+// funï¿½ï¿½o para ordenar um vetor
 void selectionSort(int*vet){
 	int i,j,menor,troca;
 	for (i=0;i<N-1;i++){
@@ -79,7 +88,7 @@ void selectionSort(int*vet){
 
 
 
-//função ordenar o vetor
+//funï¿½ï¿½o ordenar o vetor
 
 int ordenado_vet (int *vet)
 {
@@ -93,83 +102,80 @@ int ordenado_vet (int *vet)
 
 
 
-//menu de opções
+//menu de opï¿½ï¿½es
 
-int menu ()
+int menu()
 {
-  int op;
+    int op;
 
-  printf ("\n\n ==== MENU DE OPCOES ====\n");
-  printf ("0 - SAIR \n");
-  printf ("1 - DIGITAR OS ELEMENTOS DO VETOR \n");
-  printf ("2 - BUSCAR POR UM ELEMENTO DO VETOR \n");
-  printf ("3 - ORDENAR O VETOR \n");
-  printf ("\nO que deseja fazer? ");
-  scanf ("%d", &op);
+    printf ("\n\n ==== MENU DE OPCOES ====\n");
+    printf ("0 - SAIR \n");
+    printf ("1 - DIGITAR OS ELEMENTOS DO VETOR \n");
+    printf ("2 - BUSCAR POR UM ELEMENTO DO VETOR \n");
+    printf ("3 - ORDENAR O VETOR \n");
+    printf ("\nO que deseja fazer? ");
+    scanf ("%d", &op);
+    fflush(stdin);
 
-  return op;
+    return op;
 }
 
 
-int
-main ()
+int main()
 {
-  int x;
-  int vet[N];
-  int op;
-  char op_busca;
-  
-  
+    int x;
+    int vet[N];
+    int op;
+    int op_busca;
   
   do
     {
-      op = menu ();
+      op = menu();
       switch (op)
-		{
-	case 0:		//código para sair
-	  break;
+	    {
+        case 0:		//cï¿½digo para sair
+        break;
 
-	
-	
-	case 1:		//código para cadastrar
+        case 1:		//cï¿½digo para cadastrar
+        {
+            cadastra_vet(vet);
+            printf("\nO vetor digitado foi: ");
+            imprime_vet (vet);
+            break;
+        }
 
-	  {
-	    cadastra_vet (vet);
-	    printf("\nO vetor digitado foi: ");
-	    imprime_vet (vet);
-	    break;
-	  }
+        case 2:		//buscar elemento de um vetor
+        {
+            do 
+            {
+                printf("digite 1 para busca simples e 2 para busca binaria: ");
+                scanf("%d", &op_busca);
 
-		case 2:		//buscar elemento de um vetor
-	  {
-	    do {
-	        printf("digite 'a' para busca simples e 'b' para busca binaria");
-	    	op_busca=getche();
-	        
-	    }while (op_busca!='a'||op_busca!='b');
-		
-		if (op_busca=='a')
-			busca (vet,x);
-		if (op_busca=='b'){
-			selectionSort(vet);
-			busca_binaria (vet,x);}
-	    break;
-	  }
-	  
-	
-	  case 3:		//ordenar um elemento do vetor
-	  {
-	    selectionSort(vet);
-		imprime_vet (vet);
-	    break;
-	  }
+            }while (op_busca < 1 && op_busca > 2);
+            
+            if (op_busca == 1)
+                busca(vet);
 
-		default:    //opção inválida
-	  	printf ("----- OPCAO INVALIDA -----");
-		}
-    }
-  while (op != 0);
+            if (op_busca == 2)
+            {
+                selectionSort(vet);
+                busca_binaria (vet,x);
+            }
+            break;
+        }
+        
+        
+        case 3:		//ordenar um elemento do vetor
+        {
+            selectionSort(vet);
+            imprime_vet (vet);
+            break;
+        }
 
-  return 0;
+            default:    //opï¿½ï¿½o invï¿½lida
+            printf ("\n----- OPCAO INVALIDA -----");
+            }
+    }while (op != 0);
 
+    return 0;
 }
